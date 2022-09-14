@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+
+
+@layer base {
+	html,
+	body {
+		@apply h-full;
+	}
+	html {
+		@apply antialiased scroll-smooth;
+		font-size: 16px;
+	}
+
+	body {
+		@apply flex flex-col overflow-x-hidden;
+	}
+}
+
+@tailwind utilities;

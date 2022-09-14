@@ -2,8 +2,13 @@
   "name": "swell-subscriptions-poc",
   "version": "0.1.0",
   "private": true,
+	"author": {
+		"name": "Monogram",
+		"email": "hello@monogram.io",
+		"url": "https://monogram.io"
+	},
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3009",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

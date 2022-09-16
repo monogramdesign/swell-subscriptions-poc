@@ -1,6 +1,6 @@
 @tailwind base;
 @tailwind components;
-
+@tailwind utilities;
 
 @layer base {
 	html,
@@ -15,6 +15,17 @@
 	body {
 		@apply flex flex-col overflow-x-hidden;
 	}
-}
 
-@tailwind utilities;
+	section {
+		@apply py-24;
+	}
+
+	.pricing-card {
+		@apply px-4 pt-4 pb-8 text-white rounded-xl bg-black/40 backdrop-blur w-full;
+		max-width: 300px;
+
+		.price-container {
+			@apply flex justify-center mt-10;
+		}
+	}
+}

@@ -1,32 +1,14 @@
-export default function ProductsPage() {
-	return <div>ProductsPage</div>
+import type { NextPage } from 'next'
+
+const Product: NextPage = () => {
+	return (
+		<section className="section">
+			<div className="container">Individual Product</div>
+		</section>
+	)
 }
 
-export async function getStaticProps() {
-	// Swell Product structure
-	// export type ProductResults = {
-	// 	count: number
-	// 	page: number
-	// 	pages: any
-	// 	results: {
-	// 		id: string
-	// 		currency: 'USD'
-	// 		description: string
-	// 		images: ProductImage[]
-	// 		name: string
-	// 		options: ProductOptions[]
-	// 		orig_price: number
-	// 		price: number
-	// 		purchase_options: ProductPurchaseOptions[]
-	// 		sale: boolean
-	// 		sku: string
-	// 		slug: string
-	// 		stock_status: null
-	// 		variants: {
-	// 			count: number
-	// 			results: ProductVariant[]
-	// 			page: number
-	// 		}
-	// 	}[]
-	// }
-}
+// export async function getStaticProps() {}
+// export async function getStaticPaths() {}
+
+export default Product

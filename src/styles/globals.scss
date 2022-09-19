@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-	html,
-	body {
-		@apply h-full;
+	#__next {
+		@apply contents;
 	}
+
 	html {
-		@apply antialiased scroll-smooth;
+		@apply h-full antialiased scroll-smooth;
 		font-size: 16px;
 	}
 
 	body {
-		@apply flex flex-col overflow-x-hidden;
+		@apply h-full flex flex-col text-[#4F4F4F];
+	}
+
+	main {
+		@apply grow bg-[#F3EFE9];
 	}
 
 	section {

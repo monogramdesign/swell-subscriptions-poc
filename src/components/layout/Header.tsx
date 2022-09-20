@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 
 const Header = () => {
 	return (
@@ -6,7 +7,7 @@ const Header = () => {
 			<nav className="container flex justify-between gap-12">
 				<div>
 					<Link href="/">
-						<a>ORIGIN</a>
+						<a className="text-xl font-bold uppercase tracking-widest">ORIGIN</a>
 					</Link>
 				</div>
 				<ul className="grow flex gap-6">
@@ -27,7 +28,9 @@ const Header = () => {
 					</li>
 				</ul>
 				<Link href="/cart">
-					<a>Cart</a>
+					<a>
+						<ShoppingCartIcon className="w-7 h-7" />
+					</a>
 				</Link>
 			</nav>
 		</header>

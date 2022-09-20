@@ -20,8 +20,24 @@
 		@apply grow bg-[#F3EFE9];
 	}
 
-	section {
+	.section {
 		@apply py-24;
+	}
+
+	.title {
+		@apply font-bold tracking-tight;
+	}
+
+	.product-grid {
+		@apply mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8;
+	}
+
+	.product-img-wrapper {
+		@apply aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80;
+	}
+
+	.sale-badge {
+		@apply absolute top-2 left-2 inline-flex items-center rounded-full bg-[#A2B22D] px-3 py-0.5 text-sm text-white;
 	}
 
 	.pricing-card {

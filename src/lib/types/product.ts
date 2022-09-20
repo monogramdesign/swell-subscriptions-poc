@@ -9,6 +9,7 @@ export type Product = {
 	price: number
 	purchase_options: ProductPurchaseOptions[]
 	sale: boolean
+	sale_price: number
 	sku: string
 	slug: string
 	stock_status: null

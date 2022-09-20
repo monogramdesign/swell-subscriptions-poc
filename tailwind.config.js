@@ -12,7 +12,7 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/aspect-ratio')],
 	content: [
 		'./src/lib/**/*.{js,ts,jsx,tsx}',
 		'./src/pages/**/*.{js,ts,jsx,tsx}',

@@ -1,4 +1,4 @@
-import { MOCK_PRODUCTS } from './products'
+import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 import ProductRow from '@components/cart/ProductRow'
 import CartSummary from '@components/cart/CartSummary'
 

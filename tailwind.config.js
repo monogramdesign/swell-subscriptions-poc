@@ -12,7 +12,11 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('@tailwindcss/aspect-ratio')],
+	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms')
+	],
 	content: [
 		'./src/lib/**/*.{js,ts,jsx,tsx}',
 		'./src/pages/**/*.{js,ts,jsx,tsx}',

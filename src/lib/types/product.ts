@@ -70,6 +70,7 @@ export type ProductImage = {
 		url: string
 		height: number
 		width: number
+		metadata: string
 	}
 }
 

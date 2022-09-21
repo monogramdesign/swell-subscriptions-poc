@@ -5,7 +5,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import type { Product } from '@lib/types'
 
 // mock data
-const MOCK_PRODUCTS = [
+export const MOCK_PRODUCTS = [
 	{
 		name: 'Triple Rainbow',
 		sku: null,
@@ -269,7 +269,7 @@ const Products: NextPage = ({ products = [] }: { products?: Product[] }) => {
 		<>
 			<section className="py-12 bg-white">
 				<div className="container">
-					<h2 className="title text-6xl">Coffee</h2>
+					<h2 className="text-6xl title">Coffee</h2>
 				</div>
 			</section>
 			<Breadcrumbs />

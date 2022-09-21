@@ -2,6 +2,7 @@ export type Product = {
 	id: string
 	currency: 'USD'
 	description: string
+	meta_description: string
 	images: ProductImage[]
 	name: string
 	options: ProductOptions[]

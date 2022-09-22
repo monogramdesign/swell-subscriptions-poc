@@ -3,7 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ['cdn.schema.io']
+		domains: ['cdn.schema.io', 'cdn.raster.app']
 	}
 }
 

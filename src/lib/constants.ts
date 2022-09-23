@@ -1,3 +1,5 @@
+export const PRODUCTS_PER_PAGE = 25
+
 export const EMPTY_CART = {
 	id: null,
 	taxes: null,

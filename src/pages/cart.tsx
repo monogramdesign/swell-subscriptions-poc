@@ -3,9 +3,11 @@ import CartSummary from '@components/cart/CartSummary'
 import { useCart } from '@lib/context/useCart'
 
 export default function Cart() {
-	const { cart } = useCart()
+	const { cart, loading } = useCart()
 
-	console.log(cart)
+	if (loading) {
+		return <div>Loading...</div>
+	}
 
 	return (
 		<div className="container flex items-start justify-between py-14 gap-x-8">
@@ -19,17 +21,12 @@ export default function Cart() {
 					<p className="w-28 text-end">Total</p>
 				</div>
 
-				{cart?.items?.map((product) => (
-					<CartProductRow {...product} key={product?.id} />
+				{cart?.items?.map((item) => (
+					<CartProductRow {...item} key={item?.id} />
 				))}
-
-				{/* {MOCK_PRODUCTS.map((product) => (
-					// TODO: fix type?
-					<ProductRow {...(product as any)} key={product?.id} />
-				))} */}
 			</div>
 
-			<CartSummary />
+			<CartSummary {...cart} />
 		</div>
 	)
 }

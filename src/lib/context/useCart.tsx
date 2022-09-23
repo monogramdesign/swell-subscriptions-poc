@@ -13,7 +13,7 @@ type CartContextType = {
 const CartContext = createContext<CartContextType>({
 	cart: EMPTY_CART,
 	loading: false,
-	updateCart: async (cart: Cart) => {}
+	updateCart: async () => {}
 })
 
 export function useCart() {

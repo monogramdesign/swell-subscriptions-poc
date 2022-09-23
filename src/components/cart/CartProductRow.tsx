@@ -1,28 +1,24 @@
-import { useState } from 'react'
 import Image from 'next/image'
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 import { formatCurrency } from '@lib/utils'
 import { Product } from '@lib/types'
 
-export default function CartProductRow({
-	name,
-	images,
-	meta_description,
-	sale,
-	sale_price,
-	price,
-	id
-}: Product) {
-	const [quantity, setQuantity] = useState(1)
+interface Props {
+	quantity: number
+	product: Product
+}
+
+export default function CartProductRow({ quantity, product }: Props) {
+	const { name, images, meta_description, sale, sale_price, price, id } = product || {}
 
 	function decrementQuantity() {
 		if (quantity > 1) {
-			setQuantity((prev) => prev - 1)
+			// setQuantity((prev) => prev - 1)
 		}
 	}
 
 	function increaseQuantity() {
-		setQuantity((prev) => prev + 1)
+		// setQuantity((prev) => prev + 1)
 	}
 	return (
 		<div className="py-4 border-b border-[#E8E6E1] flex gap-x-8 justify-between" key={id}>

@@ -1,8 +1,10 @@
 import { Product } from './product'
 
 export type CartProduct = {
+	id: string
 	product_id: string
 	quantity: number
+	product: Product
 	options?: Record<string, unknown>
 }
 
@@ -18,7 +20,7 @@ export type Cart = {
 	shipment_price: number | 0
 	shipment_discount: number | 0
 	promotion_ids: any[]
-	items: Product[]
+	items: CartProduct[]
 	item_tax: number
 	item_shipment_weight: number
 	item_quantity: number

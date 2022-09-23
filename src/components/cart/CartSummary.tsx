@@ -1,7 +1,8 @@
 import { formatCurrency } from '@lib/utils'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
+import { Cart } from '@lib/types'
 
-export default function CartSummary() {
+export default function CartSummary({ sub_total, tax_total, shipping }: Cart) {
 	return (
 		<div className="bg-[#1C3F3A] max-w-[367px] w-full p-8 text-white flex flex-col">
 			<h1 className="text-3xl">Summary</h1>
@@ -10,28 +11,28 @@ export default function CartSummary() {
 			<div className="flex items-center justify-between mt-6">
 				<p>Subtotal</p>
 
-				<p>{formatCurrency({ amount: 1000 })}</p>
+				<p>{formatCurrency({ amount: sub_total })}</p>
 			</div>
 
 			{/* Sales tax */}
 			<div className="flex items-center justify-between mt-4">
 				<p>Sales tax</p>
 
-				<p>{formatCurrency({ amount: 20 })}</p>
+				<p>{formatCurrency({ amount: tax_total })}</p>
 			</div>
 
 			{/* Shipping */}
 			<div className="flex items-center justify-between py-4 mt-14">
 				<p>Shipping</p>
 
-				<p>{formatCurrency({ amount: 50 })}</p>
+				<p>{formatCurrency({ amount: shipping })}</p>
 			</div>
 
 			{/* Total */}
 			<div className="flex items-center justify-between py-4 font-medium border-t border-white">
 				<p>Total</p>
 
-				<p className="text-xl">{formatCurrency({ amount: 1060 })}</p>
+				<p className="text-xl">{formatCurrency({ amount: sub_total })}</p>
 			</div>
 
 			{/* Proceed to checkout */}

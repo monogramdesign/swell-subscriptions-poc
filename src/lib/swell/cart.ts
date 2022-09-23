@@ -6,7 +6,7 @@ import type { CartProduct } from '@lib/types'
  * @param product -- Product to add to cart; format defined by Swell API
  * @returns returns the new cart
  */
-export const addToCart = async (product: CartProduct) => {
+export const addToCart = async (product: Pick<CartProduct, 'product_id' | 'quantity'>) => {
 	const cart = await swell.cart.addItem(product)
 	return cart
 }

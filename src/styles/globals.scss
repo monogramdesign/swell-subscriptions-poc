@@ -50,12 +50,20 @@
 	}
 }
 
+.page-title {
+	@apply py-6 bg-white;
+
+	h1 {
+		@apply text-5xl title;
+	}
+}
+
 
 #home {
 	.hero {
 		@apply space-y-10 mt-16;
 
-		h2 {
+		h1 {
 			@apply font-medium text-right;
 		}
 

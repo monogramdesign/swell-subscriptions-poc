@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			<div className="container hero">
-				<h2>Origin Coffee, An Absolute Treat</h2>
+				<h1>Origin Coffee, An Absolute Treat</h1>
 
 				<div className="image-block">
 					<div>

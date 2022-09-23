@@ -10,11 +10,12 @@ import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 const Products: NextPage = ({ products = [] }: { products?: Product[] }) => {
 	return (
 		<>
-			<section className="py-12 bg-white mb-6">
+			<section className="page-title">
 				<div className="container">
-					<h2 className="text-6xl title">Coffee</h2>
+					<h1>Products</h1>
 				</div>
 			</section>
+
 			<Breadcrumbs />
 			<ProductGrid products={products} />
 		</>

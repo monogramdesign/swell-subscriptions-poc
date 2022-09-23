@@ -10,7 +10,7 @@ import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 
 const ProductPage = ({ product }: { product: Product }) => {
 	return (
-		<section className="section">
+		<section>
 			<Breadcrumbs />
 			<div className="container py-24">
 				<div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">

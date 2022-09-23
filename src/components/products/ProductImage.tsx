@@ -12,10 +12,7 @@ const ProductImage = ({ images }: { images?: ProductImage[] }) => {
 			<div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
 				<Tab.List className="grid grid-cols-4 gap-6">
 					{images?.map((image) => (
-						<Tab
-							key={image.id}
-							className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-[#A2B22D] focus:ring-opacity-50 focus:ring-offset-4"
-						>
+						<Tab key={image.id} className="product-img-tab">
 							{({ selected }) => (
 								<>
 									<span className="sr-only"> {image.file.metadata} </span>

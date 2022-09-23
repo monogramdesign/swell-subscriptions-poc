@@ -24,9 +24,9 @@ const ProductItem = ({ product }: { product: Product }) => {
 				</h3>
 				{product.sale ? (
 					<div className="text-lg font-medium flex gap-3 items-center">
-						<p className="text-[#A2B22D]">{formatCurrency({ amount: product.sale_price })}</p>
+						<p className="text-[#A2B22D]">{formatCurrency({ amount: product.price })}</p>
 						<p className="text-sm decoration-1 line-through text-zinc-400">
-							{formatCurrency({ amount: product.price })}
+							{formatCurrency({ amount: product.orig_price })}
 						</p>
 					</div>
 				) : (

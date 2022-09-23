@@ -4,7 +4,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline'
 export default function CartSummary() {
 	return (
 		<div className="bg-[#1C3F3A] max-w-[367px] w-full p-8 text-white flex flex-col">
-			<h2 className="text-3xl">Summary</h2>
+			<h1 className="text-3xl">Summary</h1>
 
 			{/* Subtotal */}
 			<div className="flex items-center justify-between mt-6">

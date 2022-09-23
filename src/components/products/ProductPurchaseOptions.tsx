@@ -29,7 +29,7 @@ const ProductPurchaseOptions = ({ product }: { product?: Product }) => {
 				{/* Price */}
 				{(!selectedPurchaseOption || selectedPurchaseOption?.id === 'standard') && (
 					<div className="mt-6">
-						<h2 className="sr-only">Product price</h2>
+						<h3 className="sr-only">Product price</h3>
 						{product?.sale ? (
 							<div className="text-2xl font-medium flex gap-3 items-center">
 								<p className="text-[#A2B22D]">{formatCurrency({ amount: product?.sale_price })}</p>

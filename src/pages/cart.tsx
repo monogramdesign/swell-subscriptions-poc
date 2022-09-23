@@ -2,9 +2,12 @@ import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 import CartProductRow from '@components/cart/CartProductRow'
 import CartSummary from '@components/cart/CartSummary'
 import useCart from '@lib/hooks/useCart'
+import { useEffect } from 'react'
 
 export default function Cart() {
 	const { cart } = useCart()
+
+	console.log(cart)
 
 	return (
 		<div className="container flex items-start justify-between py-14 gap-x-8">

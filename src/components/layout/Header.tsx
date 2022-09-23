@@ -39,13 +39,14 @@ const Header = () => {
 					</li>
 				</ul>
 				<Link href="/cart">
-					<a className="relative">
+					<a className="flex items-center gap-x-2">
+						<ShoppingCartIcon className="w-7 h-7" />
+
 						{item_quantity && (
-							<span className="rounded-full p-1 absolute -right-full top-0 aspect-square w-6 h-6 flex place-content-center text-xs bg-[#A2B22D] font-bold text-white">
+							<span className="rounded-full p-1 w-6 h-6 flex place-content-center text-xs bg-[#A2B22D] font-bold text-white">
 								{item_quantity}
 							</span>
 						)}
-						<ShoppingCartIcon className="w-7 h-7" />
 					</a>
 				</Link>
 			</nav>

@@ -5,7 +5,7 @@ import type { Cart } from '@lib/types'
 
 export default function useCart() {
 	const [cart, setCart] = useState<Cart>(EMPTY_CART)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	console.log(cart)
 

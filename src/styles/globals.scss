@@ -36,6 +36,10 @@
 		@apply aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80;
 	}
 
+	.product-img-tab {
+		@apply relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-[#A2B22D] focus:ring-opacity-50 focus:ring-offset-4;
+	}
+
 	.sale-badge {
 		@apply absolute top-2 left-2 inline-flex items-center rounded-full bg-[#A2B22D] px-3 py-0.5 text-sm text-white;
 	}
@@ -57,7 +61,6 @@
 		@apply text-5xl title;
 	}
 }
-
 
 #home {
 	.hero {

@@ -42,9 +42,9 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 					<h2 className="sr-only">Product price</h2>
 					{product?.sale ? (
 						<div className="flex items-center gap-3 text-2xl font-medium">
-							<p className="text-[#A2B22D]">{formatCurrency({ amount: product?.sale_price })}</p>
+							<p className="text-[#A2B22D]">{formatCurrency({ amount: product?.price })}</p>
 							<p className="text-lg line-through decoration-1 text-zinc-400">
-								{formatCurrency({ amount: product.price })}
+								{formatCurrency({ amount: product.orig_price })}
 							</p>
 						</div>
 					) : (

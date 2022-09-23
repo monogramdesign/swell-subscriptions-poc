@@ -4,7 +4,7 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { addToCart, removeItemFromCart, updateQtyInCart } from '@lib/swell/cart'
 import { Product } from '@lib/types'
 import { formatCurrency } from '@lib/utils'
-import useCart from '@lib/hooks/useCart'
+import { useCart } from '@lib/context/useCart'
 
 const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const { updateCart } = useCart()

@@ -1,17 +1,11 @@
-import { useEffect } from 'react'
 import Link from 'next/link'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import useCart from '@lib/hooks/useCart'
+import { useCart } from '@lib/context/useCart'
 
 const Header = () => {
 	const {
-		initCart,
 		cart: { item_quantity }
 	} = useCart()
-
-	useEffect(() => {
-		initCart()
-	}, [])
 
 	return (
 		<header className="py-12 text-lg bg-white">

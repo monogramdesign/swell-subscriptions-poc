@@ -1,8 +1,6 @@
-import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 import CartProductRow from '@components/cart/CartProductRow'
 import CartSummary from '@components/cart/CartSummary'
-import useCart from '@lib/hooks/useCart'
-import { useEffect } from 'react'
+import { useCart } from '@lib/context/useCart'
 
 export default function Cart() {
 	const { cart } = useCart()

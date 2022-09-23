@@ -4,7 +4,7 @@ import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 import { formatCurrency } from '@lib/utils'
 import { Product } from '@lib/types'
 
-export default function ProductRow({
+export default function CartProductRow({
 	name,
 	images,
 	meta_description,

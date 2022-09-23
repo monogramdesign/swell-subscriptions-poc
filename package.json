@@ -16,7 +16,8 @@
   "dependencies": {
     "next": "12.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swell-js": "^3.17.6"
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.2",

@@ -8,7 +8,7 @@ import { Product } from '@lib/types'
 // mock data
 import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
 
-const ProductPage: NextPage = ({ product }: { product?: Product }) => {
+const ProductPage = ({ product }: { product: Product }) => {
 	return (
 		<section className="section">
 			<Breadcrumbs />

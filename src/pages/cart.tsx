@@ -1,8 +1,11 @@
 import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
-import ProductRow from '@components/cart/ProductRow'
+import CartProductRow from '@components/cart/CartProductRow'
 import CartSummary from '@components/cart/CartSummary'
+import useCart from '@lib/hooks/useCart'
 
 export default function Cart() {
+	const { cart } = useCart()
+
 	return (
 		<div className="container flex items-start justify-between py-14 gap-x-8">
 			{/* Products list */}
@@ -15,10 +18,14 @@ export default function Cart() {
 					<p className="w-28 text-end">Total</p>
 				</div>
 
-				{MOCK_PRODUCTS.map((product) => (
+				{cart?.items?.map((product) => (
+					<CartProductRow {...product} key={product?.id} />
+				))}
+
+				{/* {MOCK_PRODUCTS.map((product) => (
 					// TODO: fix type?
 					<ProductRow {...(product as any)} key={product?.id} />
-				))}
+				))} */}
 			</div>
 
 			<CartSummary />

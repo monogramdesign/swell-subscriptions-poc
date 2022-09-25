@@ -5,8 +5,7 @@ import ProductImage from '@components/products/ProductImage'
 import type { GetStaticProps, NextPage } from 'next'
 import { Product } from '@lib/types'
 
-// mock data
-import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
+import { getProductBySlug, getProducts } from '@lib/swell/products'
 
 const ProductPage = ({ product }: { product: Product }) => {
 	return (
@@ -22,20 +21,21 @@ const ProductPage = ({ product }: { product: Product }) => {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// TODO: get product by slug
-	const slug = params?.slug
+export async function getStaticPaths() {
+	const { results: products } = await getProducts()
+
 	return {
-		props: { product: MOCK_PRODUCTS.find((product) => product.slug === slug) }
+		paths: products.map(({ slug }) => ({ params: { slug } })),
+		fallback: false
 	}
 }
 
-export async function getStaticPaths() {
-	// TODO: get All products
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const slug = params?.slug as string
+	const product = await getProductBySlug(slug)
 
 	return {
-		paths: MOCK_PRODUCTS.map(({ slug }) => ({ params: { slug } })),
-		fallback: false
+		props: { product }
 	}
 }
 

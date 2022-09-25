@@ -17,3 +17,12 @@ export const getProducts = async (limit = PRODUCTS_PER_PAGE, page = 1): Promise<
 
 	return products
 }
+
+export const getProductBySlug = async (slug: string): Promise<ProductResults | null> => {
+	const product = await swell.products.get({
+		slug,
+		expand: ['variants']
+	})
+
+	return product.results[0]
+}

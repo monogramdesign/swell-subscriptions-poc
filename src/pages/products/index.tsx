@@ -4,9 +4,6 @@ import Breadcrumbs from '@components/layout/Breadcrumbs'
 import type { GetStaticProps, NextPage } from 'next'
 import type { Product } from '@lib/types'
 
-// mock data
-import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
-
 const Products: NextPage = ({ products = [] }: { products?: Product[] }) => {
 	return (
 		<>
@@ -16,16 +13,16 @@ const Products: NextPage = ({ products = [] }: { products?: Product[] }) => {
 				</div>
 			</section>
 
-			<Breadcrumbs />
-			<ProductGrid products={products} />
+			{/* TODO: ADD BREADCRUMBS HERE. */}
+			{/* TODO: ADD PRODUCT GRID */}
 		</>
 	)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	// TODO: fetch products from swell
+	// TODO: FETCH PRODUCTS FROM SWELL
 	return {
-		props: { products: MOCK_PRODUCTS }
+		props: { products: [] }
 	}
 }
 

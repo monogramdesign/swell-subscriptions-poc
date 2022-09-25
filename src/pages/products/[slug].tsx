@@ -5,37 +5,36 @@ import ProductImage from '@components/products/ProductImage'
 import type { GetStaticProps, NextPage } from 'next'
 import { Product } from '@lib/types'
 
-// mock data
-import { MOCK_PRODUCTS } from '@lib/swell/mock-data'
-
 const ProductPage: NextPage = ({ product }: { product?: Product }) => {
 	return (
 		<section>
-			<Breadcrumbs />
+			{/* TODO: ADD BREADCRUMBS HERE. */}
+
 			<div className="container py-24">
 				<div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-					<ProductImage images={product?.images} />
-					<ProductInfo product={product} />
+					{/* TODO: ADD PRODUCT IMAGE (RIGHT SIDE) */}
+
+					{/* TODO: ADD PRODUCT INFO (LEFT SIDE) */}
 				</div>
 			</div>
 		</section>
 	)
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// TODO: get product by slug
-	const slug = params?.slug
+export async function getStaticPaths() {
+	// TODO: GET ALL PRODUCT PATHS FROM SWELL
+
 	return {
-		props: { product: MOCK_PRODUCTS.find((product) => product.slug === slug) }
+		paths: 'blank',
+		fallback: false
 	}
 }
 
-export async function getStaticPaths() {
-	// TODO: get All products
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	// TODO: GET PRODUCT BY SLUG FROM SWELL
 
 	return {
-		paths: MOCK_PRODUCTS.map(({ slug }) => ({ params: { slug } })),
-		fallback: false
+		props: { product: null }
 	}
 }
 

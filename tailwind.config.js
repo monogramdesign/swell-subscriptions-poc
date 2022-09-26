@@ -2,6 +2,10 @@
 module.exports = {
 	theme: {
 		extend: {
+			colors: {
+				'origin-citrus': '#9eb300',
+				'origin-cyprus': '#0a403a'
+			},
 			container: {
 				center: true,
 				padding: '2rem'

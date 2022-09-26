@@ -9,8 +9,23 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const { updateCart } = useCart()
 
 	/**
-	 * Simplifying the purchase options for this demo;
-	 * epecially when we're offering multiple purchase options.
+	 * Storing the price in a state variable
+	 * so we can update it when the user changes the purchase option.
+	 */
+	const [price, setPrice] = useState(product?.price)
+
+	/**
+	 * Based on the purchase options offered,
+	 * we're just going to make it simpler for coding/display purposes.
+	 * We are using these size options to display the box sizes.
+	 */
+	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
+
+	/**
+	 * Simplifying the purchase options for this demo.
+	 *
+	 * Used in the purchase options radio buttons
+	 * ('One-time purchase' vs. 'Subscribe & save')
 	 */
 	const purchaseOptions = product?.purchase_options
 		? Object.keys(product?.purchase_options)?.map((option) => ({
@@ -25,18 +40,15 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		: []
 
 	/**
-	 * Based on the purchase options offered,
-	 * we're just going to make it simpler for coding/display purposes.
-	 * We are using these size options to display the box sizes.
+	 * User-selected size. (eg. "Standard box (12oz)" or "Bulk bag (5lbs)").
+	 * Initialized to the first size option in the list.
 	 */
-	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
+	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
 
 	/**
-	 * Storing the price in a state variable
-	 * so we can update it when the user changes the purchase option.
+	 * User-selected "subscription plan" (eg. "Every 4 weeks" or "Every 2 months").
+	 * Initialized to the first delivery option in the list.
 	 */
-	const [price, setPrice] = useState(product?.price)
-	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
 	const [subscriptionPlan, setSubscriptionPlan] = useState(
 		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
 	)
@@ -64,18 +76,19 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		}
 	}, [product?.price, subscriptionPlan?.price, selectedPurchaseOption, selectedSize])
 
-	// Get the plan object from the selected plan ID
+	// Helper: Get the plan object from the selected plan ID
 	const subscriptionPlanFromId = (id: string) => {
 		return product.purchase_options.subscription.plans.find((plan: any) => plan.id === id)
 	}
 
-	// Get the size from the selected size ID
+	// Helper: Get the size from the selected size ID
 	const sizeFromId = (id: string) => {
 		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
 	}
 
 	/**
 	 * Called when the "Add to Cart" button is clicked.
+	 *
 	 * Handles two types of purchase options:
 	 * 1. Standard
 	 * 2. Subscription
@@ -172,7 +185,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 			{selectedPurchaseOption?.id === 'subscription' && (
 				<div>
 					<label htmlFor="plan" className="block text-sm font-medium text-gray-700">
-						Delivery every
+						Delivery
 					</label>
 					<select
 						id="plan"
@@ -183,7 +196,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 					>
 						{product?.purchase_options.subscription.plans.map((plan: any) => (
 							<option key={plan.id} value={plan.id}>
-								{getDeliveryFrequency(plan)}
+								Every {getDeliveryFrequency(plan)}
 							</option>
 						))}
 					</select>

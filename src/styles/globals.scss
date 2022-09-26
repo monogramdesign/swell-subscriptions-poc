@@ -3,21 +3,45 @@
 @tailwind utilities;
 
 @layer base {
-	html,
-	body {
-		@apply h-full;
+	#__next {
+		@apply contents;
 	}
+
 	html {
-		@apply antialiased scroll-smooth;
+		@apply h-full antialiased scroll-smooth;
 		font-size: 16px;
 	}
 
 	body {
-		@apply flex flex-col overflow-x-hidden;
+		@apply h-full flex flex-col text-[#4F4F4F];
 	}
 
-	section {
+	main {
+		@apply grow bg-[#F3EFE9];
+	}
+
+	.section {
 		@apply py-24;
+	}
+
+	.title {
+		@apply font-bold tracking-tight;
+	}
+
+	.product-grid {
+		@apply mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8;
+	}
+
+	.product-img-wrapper {
+		@apply aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80;
+	}
+
+	.product-img-tab {
+		@apply relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-[#A2B22D] focus:ring-opacity-50 focus:ring-offset-4;
+	}
+
+	.sale-badge {
+		@apply absolute top-2 left-2 inline-flex items-center rounded-full bg-[#A2B22D] px-3 py-0.5 text-sm text-white;
 	}
 
 	.pricing-card {
@@ -28,4 +52,41 @@
 			@apply flex justify-center mt-10;
 		}
 	}
+}
+
+.page-title {
+	@apply py-6 bg-white;
+
+	h1 {
+		@apply text-5xl title;
+	}
+}
+
+#home {
+	.hero {
+		@apply space-y-10 mt-16;
+
+		h1 {
+			@apply font-medium text-right;
+		}
+
+		.image-block {
+			@apply h-[330px] bg-[#F0F55A] relative;
+
+			div {
+				@apply absolute top-0 inline-block -translate-y-1/3 ml-16 transform;
+			}
+		}
+	}
+}
+
+
+.button {
+	&.add-to-cart {
+		@apply self-start flex items-center gap-4 px-6 py-2.5 rounded-full bg-gray-800 text-white text-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#A2B22D] focus:ring-offset-2 focus:ring-offset-gray-50;
+	}
+}
+
+.drop-down {
+	@apply mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-[#A2B22D] focus:outline-none focus:ring-[#A2B22D] sm:text-sm;
 }

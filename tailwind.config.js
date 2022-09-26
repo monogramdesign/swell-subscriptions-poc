@@ -2,6 +2,10 @@
 module.exports = {
 	theme: {
 		extend: {
+			colors: {
+				'origin-citrus': '#9eb300',
+				'origin-cyprus': '#0a403a'
+			},
 			container: {
 				center: true,
 				padding: '2rem'
@@ -12,7 +16,11 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms')
+	],
 	content: [
 		'./src/lib/**/*.{js,ts,jsx,tsx}',
 		'./src/pages/**/*.{js,ts,jsx,tsx}',

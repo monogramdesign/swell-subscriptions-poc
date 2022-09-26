@@ -25,7 +25,7 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 
 	return (
 		<div className="py-4 border-b border-[#E8E6E1] flex gap-x-8 justify-between" key={id}>
-			<div className="max-w-[433px] flex gap-x-4">
+			<div className="w-3/6 flex gap-x-4">
 				{/* Image */}
 				{images?.[0]?.file?.url && (
 					<div className="max-w-[112px] w-full">

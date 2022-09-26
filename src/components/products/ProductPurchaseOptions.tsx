@@ -8,14 +8,10 @@ import { useCart } from '@lib/context/useCart'
 const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const { updateCart } = useCart()
 
-	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
-
-	const [price, setPrice] = useState(product?.price)
-	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
-	const [subscriptionPlan, setSubscriptionPlan] = useState(
-		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
-	)
-
+	/**
+	 * Simplifying the purchase options for this demo;
+	 * epecially when we're offering multiple purchase options.
+	 */
 	const purchaseOptions = product?.purchase_options
 		? Object.keys(product?.purchase_options)?.map((option) => ({
 				id: option,
@@ -28,6 +24,19 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		  }))
 		: []
 
+	/**
+	 * Based on the purchase options offered,
+	 * we're just going to make it simpler for coding/display purposes.
+	 * We are using these size options to display the box sizes.
+	 */
+	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
+
+	const [price, setPrice] = useState(product?.price)
+	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
+	const [subscriptionPlan, setSubscriptionPlan] = useState(
+		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
+	)
+
 	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(
 		purchaseOptions[0] || { id: 'standard' }
 	)
@@ -36,11 +45,11 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	useEffect(() => {
 		// STANDARD
 		if (selectedPurchaseOption.id === 'standard') {
-			setPrice(product?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+			setPrice(product?.price + (selectedSize?.price ? selectedSize?.price : 0))
 
 			// SUBSCRIPTION
 		} else {
-			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price : 0))
 		}
 	}, [product?.price, selectedPurchaseOption, selectedSize, subscriptionPlan])
 

@@ -44,6 +44,16 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		}
 	}, [product?.price, selectedPurchaseOption, selectedSize, subscriptionPlan])
 
+	// Get the plan object from the selected plan ID
+	const subscriptionPlanFromId = (id: string) => {
+		return product.purchase_options.subscription.plans.find((plan: any) => plan.id === id)
+	}
+
+	// Get the size from the selected size ID
+	const sizeFromId = (id: string) => {
+		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
+	}
+
 	// Add to cart
 	const handleAddToCart = async () => {
 		// STANDARD
@@ -72,15 +82,6 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 
 			updateCart(currentCart)
 		}
-	}
-
-	// Get the plan object from the selected plan ID
-	const subscriptionPlanFromId = (id: string) => {
-		return product.purchase_options.subscription.plans.find((plan: any) => plan.id === id)
-	}
-
-	const sizeFromId = (id: string) => {
-		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
 	}
 
 	return (

@@ -25,3 +25,13 @@ export const capitalize = (text: string) => {
 	const first = lower.charAt(0).toUpperCase()
 	return first + lower.slice(1)
 }
+
+export const getDeliveryFrequency = (plan: any) => {
+	if (plan.billing_schedule.interval_count === 1) {
+		return plan.billing_schedule.interval
+	} else {
+		return `${plan.billing_schedule.interval_count} ${
+			plan.billing_schedule.interval === 'weekly' ? 'weeks' : 'months'
+		}`
+	}
+}

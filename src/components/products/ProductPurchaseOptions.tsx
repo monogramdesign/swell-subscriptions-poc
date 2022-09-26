@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { addToCart } from '@lib/swell/cart'
 import { Product } from '@lib/types'
-import { formatCurrency } from '@lib/utils'
+import { formatCurrency, getDeliveryFrequency } from '@lib/utils'
 import { useCart } from '@lib/context/useCart'
 
 const ProductPurchaseOptions = ({ product }: { product: Product }) => {
@@ -30,19 +30,45 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 
 	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(purchaseOptions[0])
 
+	// Update price when selected size changes
 	useEffect(() => {
-		if (selectedPurchaseOption.id === 'subscription') {
-			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
-		} else {
+		// STANDARD
+		if (selectedPurchaseOption.id === 'standard') {
 			setPrice(product?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+			// SUBSCRIPTION
+		} else {
+			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
 		}
 	}, [product?.price, selectedPurchaseOption, selectedSize, subscriptionPlan])
 
+	// Add to cart
 	const handleAddToCart = async () => {
-		const currentCart = await addToCart({ product_id: product?.id, quantity: 1 })
+		// STANDARD
+		if (selectedPurchaseOption.id === 'standard') {
+			const currentCart = await addToCart({ product_id: product?.id, quantity: 1 })
+			updateCart(currentCart)
+		}
 
-		console.log(currentCart)
-		updateCart(currentCart)
+		// SUBSCRIPTION
+		if (selectedPurchaseOption.id === 'subscription') {
+			const currentCart = await addToCart({
+				product_id: product?.id,
+				quantity: 1,
+				// @ts-ignore
+				options: [
+					{
+						name: 'Size',
+						value: selectedSize?.name
+					}
+				],
+				purchase_option: {
+					type: 'subscription',
+					plan_id: subscriptionPlan?.id
+				}
+			})
+
+			updateCart(currentCart)
+		}
 	}
 
 	// Get the plan object from the selected plan ID
@@ -52,16 +78,6 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 
 	const sizeFromId = (id: string) => {
 		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
-	}
-
-	const getDeliveryFrequency = (plan: any) => {
-		if (plan.billing_schedule.interval_count === 1) {
-			return plan.billing_schedule.interval
-		} else {
-			return `${plan.billing_schedule.interval_count} ${
-				plan.billing_schedule.interval === 'weekly' ? 'weeks' : 'months'
-			}`
-		}
 	}
 
 	return (

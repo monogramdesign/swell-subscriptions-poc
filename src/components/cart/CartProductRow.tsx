@@ -1,25 +1,19 @@
 import Image from 'next/image'
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
-import { formatCurrency } from '@lib/utils'
-import { Product } from '@lib/types'
+import { formatCurrency, getDeliveryFrequency } from '@lib/utils'
 
-interface Props {
-	quantity: number
-	product: Product
-}
-
-export default function CartProductRow({ quantity, product }: Props) {
-	const { name, images, meta_description, sale, sale_price, price, id } = product || {}
+export default function CartProductRow({ cartItem }: { cartItem: any }) {
+	const { quantity, price, purchase_option, variant } = cartItem || {}
+	const { name, images, sale, sale_price, id } = cartItem?.product || {}
 
 	function decrementQuantity() {
-		if (quantity > 1) {
-			// setQuantity((prev) => prev - 1)
-		}
+		// setQuantity((prev) => prev - 1)
 	}
 
 	function increaseQuantity() {
 		// setQuantity((prev) => prev + 1)
 	}
+
 	return (
 		<div className="py-4 border-b border-[#E8E6E1] flex gap-x-8 justify-between" key={id}>
 			<div className="max-w-[433px] flex gap-x-4">
@@ -40,7 +34,11 @@ export default function CartProductRow({ quantity, product }: Props) {
 					{name && <h3 className="text-xl text-[#1C1C18]">{name}</h3>}
 
 					{/* Product description */}
-					{meta_description && <p className="text-sm text-[#4F4F4F]">{meta_description}</p>}
+					{purchase_option && (
+						<p className="text-sm text-[#4F4F4F]">
+							Subscribe &amp; save, {variant.name} every {getDeliveryFrequency(purchase_option)}
+						</p>
+					)}
 				</div>
 			</div>
 

@@ -22,7 +22,7 @@ export default function Cart() {
 				</div>
 
 				{cart?.items?.map((item) => (
-					<CartProductRow {...item} key={item?.id} />
+					<CartProductRow cartItem={item} key={item?.id} />
 				))}
 			</div>
 

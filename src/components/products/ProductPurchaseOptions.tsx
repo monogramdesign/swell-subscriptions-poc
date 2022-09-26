@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { addToCart } from '@lib/swell/cart'
-import { Product } from '@lib/types'
+import type { Product } from '@lib/types'
 import { formatCurrency, getDeliveryFrequency } from '@lib/utils'
 import { useCart } from '@lib/context/useCart'
 
@@ -31,17 +31,28 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	 */
 	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
 
+	/**
+	 * Storing the price in a state variable
+	 * so we can update it when the user changes the purchase option.
+	 */
 	const [price, setPrice] = useState(product?.price)
 	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
 	const [subscriptionPlan, setSubscriptionPlan] = useState(
 		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
 	)
 
+	/**
+	 * If we have products that do not offer a subscription
+	 * always initialize the state variable to the standard purchase option.
+	 */
 	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(
 		purchaseOptions[0] || { id: 'standard' }
 	)
 
-	// Update price when selected size changes
+	/**
+	 * Update price when the user makes their selection:
+	 * from the purchase options ("standard" vs. "subscription") and the size offered.
+	 */
 	useEffect(() => {
 		// STANDARD
 		if (selectedPurchaseOption.id === 'standard') {
@@ -51,7 +62,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		} else {
 			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price : 0))
 		}
-	}, [product?.price, selectedPurchaseOption, selectedSize, subscriptionPlan])
+	}, [product?.price, subscriptionPlan?.price, selectedPurchaseOption, selectedSize])
 
 	// Get the plan object from the selected plan ID
 	const subscriptionPlanFromId = (id: string) => {
@@ -63,7 +74,12 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
 	}
 
-	// Add to cart
+	/**
+	 * Called when the "Add to Cart" button is clicked.
+	 * Handles two types of purchase options:
+	 * 1. Standard
+	 * 2. Subscription
+	 */
 	const handleAddToCart = async () => {
 		// STANDARD
 		if (selectedPurchaseOption.id === 'standard') {
@@ -88,7 +104,6 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 					plan_id: subscriptionPlan?.id
 				}
 			})
-
 			updateCart(currentCart)
 		}
 	}
@@ -166,6 +181,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 				</div>
 			)}
 
+			{/* Add to cart */}
 			<button className="button add-to-cart" onClick={handleAddToCart}>
 				Add to Cart
 				<ShoppingCartIcon className="w-5 h-5" />

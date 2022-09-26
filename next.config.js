@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	swcMinify: true,
+	swcMinify: false,
 	images: {
 		domains: ['cdn.schema.io', 'cdn.raster.app']
 	}

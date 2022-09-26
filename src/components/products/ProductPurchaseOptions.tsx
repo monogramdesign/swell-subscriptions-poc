@@ -83,7 +83,16 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const handleAddToCart = async () => {
 		// STANDARD
 		if (selectedPurchaseOption.id === 'standard') {
-			const currentCart = await addToCart({ product_id: product?.id, quantity: 1 })
+			const currentCart = await addToCart({
+				product_id: product?.id,
+				quantity: 1, // @ts-ignore
+				options: [
+					{
+						name: 'Size',
+						value: selectedSize?.name
+					}
+				]
+			})
 			updateCart(currentCart)
 		}
 

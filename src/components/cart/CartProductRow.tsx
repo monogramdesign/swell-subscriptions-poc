@@ -43,10 +43,12 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 					{name && <h3 className="text-xl text-[#1C1C18]">{name}</h3>}
 
 					{/* Product description */}
-					{purchase_option && (
+					{purchase_option ? (
 						<p className="text-sm text-[#4F4F4F]">
 							Subscribe &amp; save, {variant.name} every {getDeliveryFrequency(purchase_option)}
 						</p>
+					) : (
+						<p className="text-sm text-[#4F4F4F]">{variant.name}</p>
 					)}
 				</div>
 			</div>

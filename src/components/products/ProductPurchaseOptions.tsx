@@ -13,7 +13,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const [price, setPrice] = useState(product?.price)
 	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
 	const [subscriptionPlan, setSubscriptionPlan] = useState(
-		product.purchase_options.subscription ? product.purchase_options.subscription.plans[0] : null
+		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
 	)
 
 	const purchaseOptions = product?.purchase_options
@@ -28,13 +28,16 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		  }))
 		: []
 
-	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(purchaseOptions[0])
+	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(
+		purchaseOptions[0] || { id: 'standard' }
+	)
 
 	// Update price when selected size changes
 	useEffect(() => {
 		// STANDARD
 		if (selectedPurchaseOption.id === 'standard') {
 			setPrice(product?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+
 			// SUBSCRIPTION
 		} else {
 			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))

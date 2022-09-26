@@ -1,8 +1,9 @@
 import { formatCurrency } from '@lib/utils'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import { Cart } from '@lib/types'
+import Link from 'next/link'
 
-export default function CartSummary({ sub_total, tax_total, shipping }: Cart) {
+export default function CartSummary({ sub_total, tax_total, checkout_url, shipment_total }: Cart) {
 	return (
 		<div className="bg-[#1C3F3A] max-w-[367px] w-full p-8 text-white flex flex-col">
 			<h1 className="text-3xl">Summary</h1>
@@ -25,7 +26,7 @@ export default function CartSummary({ sub_total, tax_total, shipping }: Cart) {
 			<div className="flex items-center justify-between py-4 mt-14">
 				<p>Shipping</p>
 
-				<p>{formatCurrency({ amount: shipping })}</p>
+				<p>{formatCurrency({ amount: shipment_total })}</p>
 			</div>
 
 			{/* Total */}
@@ -36,9 +37,13 @@ export default function CartSummary({ sub_total, tax_total, shipping }: Cart) {
 			</div>
 
 			{/* Proceed to checkout */}
-			<button className="flex items-center justify-center w-full py-3 mt-20 bg-white rounded-full gap-x-4 text-slate-800">
-				Proceed to Checkout <ArrowRightIcon className="w-4 stroke-slate-800" />
-			</button>
+			{checkout_url && (
+				<Link href={checkout_url as string} replace>
+					<a className="flex items-center justify-center w-full py-3 mt-20 bg-white rounded-full gap-x-4 text-slate-800">
+						Proceed to Checkout <ArrowRightIcon className="w-4 stroke-slate-800" />
+					</a>
+				</Link>
+			)}
 		</div>
 	)
 }

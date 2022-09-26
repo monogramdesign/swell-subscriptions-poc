@@ -17,7 +17,7 @@ export const formatCurrency = ({
 		maximumFractionDigits: decimalPlaces
 	})
 
-	return formatter.format(amount)
+	return isNaN(amount) ? '--' : formatter.format(amount)
 }
 
 export const capitalize = (text: string) => {

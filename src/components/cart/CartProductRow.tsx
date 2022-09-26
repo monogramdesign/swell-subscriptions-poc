@@ -1,8 +1,12 @@
 import Image from 'next/image'
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 import { formatCurrency, getDeliveryFrequency } from '@lib/utils'
+import { removeItemFromCart } from '@lib/swell/products'
+import { useCart } from '@lib/context/useCart'
 
 export default function CartProductRow({ cartItem }: { cartItem: any }) {
+	const { updateCart } = useCart()
+
 	const { quantity, price, purchase_option, variant } = cartItem || {}
 	const { name, images, sale, sale_price, id } = cartItem?.product || {}
 
@@ -12,6 +16,11 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 
 	function increaseQuantity() {
 		// setQuantity((prev) => prev + 1)
+	}
+
+	const removeProduct = async () => {
+		const cart = await removeItemFromCart(cartItem.id)
+		updateCart(cart)
 	}
 
 	return (
@@ -73,7 +82,9 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 				)}
 
 				{/* Remove from cart */}
-				<button className="mt-auto text-[#DD4C79]">Remove</button>
+				<button className="mt-auto text-[#DD4C79]" onClick={removeProduct}>
+					Remove
+				</button>
 			</div>
 		</div>
 	)

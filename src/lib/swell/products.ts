@@ -26,3 +26,8 @@ export const getProductBySlug = async (slug: string): Promise<ProductResults | n
 
 	return product.results[0]
 }
+
+export const removeItemFromCart = async (itemId: string) => {
+	const cart = await swell.cart.removeItem(itemId)
+	return cart
+}

@@ -8,7 +8,7 @@ export type Product = {
 	options: ProductOptions[]
 	orig_price: number
 	price: number
-	purchase_options: ProductPurchaseOptions[]
+	purchase_options: ProductPurchaseOptions
 	sale: boolean
 	sale_price: number
 	sku: string
@@ -40,6 +40,7 @@ export type ProductPurchaseOptions = {
 		sale: boolean
 		sale_price: number
 	}
+	subscription?: any
 }
 
 export type ProductOption = {

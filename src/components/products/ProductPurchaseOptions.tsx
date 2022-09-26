@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import SelectElement from '@components/ui/SelectElement'
+import { useEffect, useState } from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import { addToCart, removeItemFromCart, updateQtyInCart } from '@lib/swell/cart'
+import { addToCart } from '@lib/swell/cart'
 import { Product } from '@lib/types'
 import { formatCurrency } from '@lib/utils'
 import { useCart } from '@lib/context/useCart'
@@ -10,7 +9,12 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const { updateCart } = useCart()
 
 	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
+
+	const [price, setPrice] = useState(product?.price)
 	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
+	const [subscriptionPlan, setSubscriptionPlan] = useState(
+		product.purchase_options.subscription ? product.purchase_options.subscription.plans[0] : null
+	)
 
 	const purchaseOptions = product?.purchase_options
 		? Object.keys(product?.purchase_options)?.map((option) => ({
@@ -26,6 +30,14 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 
 	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(purchaseOptions[0])
 
+	useEffect(() => {
+		if (selectedPurchaseOption.id === 'subscription') {
+			setPrice(subscriptionPlan?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+		} else {
+			setPrice(product?.price + (selectedSize?.price ? selectedSize?.price || 0 : 0))
+		}
+	}, [product?.price, selectedPurchaseOption, selectedSize, subscriptionPlan])
+
 	const handleAddToCart = async () => {
 		const currentCart = await addToCart({ product_id: product?.id, quantity: 1 })
 
@@ -33,27 +45,53 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		updateCart(currentCart)
 	}
 
+	// Get the plan object from the selected plan ID
+	const subscriptionPlanFromId = (id: string) => {
+		return product.purchase_options.subscription.plans.find((plan: any) => plan.id === id)
+	}
+
+	const sizeFromId = (id: string) => {
+		return sizeOptions && sizeOptions.find((size: any) => size.id === id)
+	}
+
+	const getDeliveryFrequency = (plan: any) => {
+		if (plan.billing_schedule.interval_count === 1) {
+			return plan.billing_schedule.interval
+		} else {
+			return `${plan.billing_schedule.interval_count} ${
+				plan.billing_schedule.interval === 'weekly' ? 'weeks' : 'months'
+			}`
+		}
+	}
+
 	return (
-		// <form className="mt-6" onSubmit={handleAddToCart}>
 		<div className="flex flex-col gap-6 mt-6">
 			{/* Price */}
-			{(!selectedPurchaseOption || selectedPurchaseOption?.id === 'standard') && (
-				<div className="mt-6">
-					<h2 className="sr-only">Product price</h2>
-					{product?.sale ? (
-						<div className="flex items-center gap-3 text-2xl font-medium">
-							<p className="text-[#A2B22D]">{formatCurrency({ amount: product?.price })}</p>
-							<p className="text-lg line-through decoration-1 text-zinc-400">
-								{formatCurrency({ amount: product.orig_price })}
-							</p>
-						</div>
-					) : (
-						<p className="text-2xl font-medium">
-							{formatCurrency({ amount: product?.price || 0 })}
-						</p>
-					)}
-				</div>
-			)}
+			<div className="mt-6">
+				<h2 className="sr-only">Product price</h2>
+				<p className="text-2xl font-medium">{formatCurrency({ amount: price || 0 })}</p>
+			</div>
+
+			{/* Box size */}
+			<div>
+				<label htmlFor="size" className="block text-sm font-medium text-gray-700">
+					Size
+				</label>
+				<select
+					id="size"
+					name="size"
+					className="drop-down"
+					defaultValue={selectedSize && selectedSize.id}
+					onChange={(e) => setSelectedSize(sizeFromId(e.target.value))}
+				>
+					{sizeOptions &&
+						sizeOptions.map((option: any) => (
+							<option key={option.id} value={option.id}>
+								{option.name}
+							</option>
+						))}
+				</select>
+			</div>
 
 			{/* Purchase option */}
 			<fieldset>
@@ -77,23 +115,33 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 				</div>
 			</fieldset>
 
-			{/* Quantity */}
-			<SelectElement
-				label="Quantity"
-				options={sizeOptions}
-				selected={selectedSize}
-				onSelect={setSelectedSize}
-			/>
+			{/* Subscription frequency */}
+			{selectedPurchaseOption?.id === 'subscription' && (
+				<div>
+					<label htmlFor="plan" className="block text-sm font-medium text-gray-700">
+						Delivery every
+					</label>
+					<select
+						id="plan"
+						name="plan"
+						className="drop-down"
+						defaultValue={subscriptionPlan.id}
+						onChange={(e) => setSubscriptionPlan(subscriptionPlanFromId(e.target.value))}
+					>
+						{product?.purchase_options.subscription.plans.map((plan: any) => (
+							<option key={plan.id} value={plan.id}>
+								{getDeliveryFrequency(plan)}
+							</option>
+						))}
+					</select>
+				</div>
+			)}
 
-			<button
-				className="self-start flex items-center gap-4 px-6 py-2.5 rounded-full bg-gray-800 text-white text-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#A2B22D] focus:ring-offset-2 focus:ring-offset-gray-50"
-				onClick={handleAddToCart}
-			>
+			<button className="button add-to-cart" onClick={handleAddToCart}>
 				Add to Cart
 				<ShoppingCartIcon className="w-5 h-5" />
 			</button>
 		</div>
-		// </form>
 	)
 }
 

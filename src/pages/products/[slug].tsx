@@ -1,4 +1,4 @@
-import Breadcrumbs from '@components/layout/Breadcrumbs'
+// import Breadcrumbs from '@components/layout/Breadcrumbs'
 import ProductInfo from '@components/products/ProductInfo'
 import ProductImage from '@components/products/ProductImage'
 
@@ -10,7 +10,8 @@ import { getProductBySlug, getProducts } from '@lib/swell/products'
 const ProductPage = ({ product }: { product: Product }) => {
 	return (
 		<section>
-			<Breadcrumbs />
+			{/* <Breadcrumbs /> */}
+
 			<div className="container py-24">
 				<div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
 					<ProductImage images={product?.images} />

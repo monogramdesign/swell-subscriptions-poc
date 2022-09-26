@@ -10,12 +10,11 @@ NEXT_PUBLIC_SWELL_STORE_ID=your-store-id
 NEXT_PUBLIC_SWELL_PUBLIC_KEY=ypur-public-key
 ```
 
-Then, run the development server:
+Then, install dependencies, and run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3009](http://localhost:3009) with your browser to see the result.

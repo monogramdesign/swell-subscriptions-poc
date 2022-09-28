@@ -95,41 +95,30 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	 */
 	const handleAddToCart = async () => {
 		// STANDARD
-		if (selectedPurchaseOption.id === 'standard') {
-			const currentCart = await addToCart({
-				product_id: product?.id,
-				quantity: 1, // @ts-ignore
-				options: [
-					{
-						name: 'Size',
-						value: selectedSize?.name
-					}
-				]
-			})
-			updateCart(currentCart)
-		}
-
-		// SUBSCRIPTION
-		if (selectedPurchaseOption.id === 'subscription') {
-			const currentCart = await addToCart({
-				product_id: product?.id,
-				quantity: 1,
-				// @ts-ignore
-				options: [
-					{
-						name: 'Size',
-						value: selectedSize?.name
-					}
-				],
+		const currentCart = await addToCart({
+			product_id: product?.id,
+			quantity: 1,
+			// @ts-ignore
+			options: [
+				{
+					name: 'Size',
+					value: selectedSize?.name
+				}
+			],
+			// SUBSCRIPTION
+			...(selectedPurchaseOption.id === 'subscription' && {
 				purchase_option: {
 					type: 'subscription',
 					plan_id: subscriptionPlan?.id
 				}
 			})
-			updateCart(currentCart)
-		}
+		})
+
+		// Update the cart context
+		updateCart(currentCart)
 	}
 
+	//
 	return (
 		<div className="flex flex-col gap-6 mt-6">
 			{/* Price */}

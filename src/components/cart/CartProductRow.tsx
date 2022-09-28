@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 import { formatCurrency, getDeliveryFrequencyDisplay } from '@lib/utils'
-import { removeItemFromCart } from '@lib/swell/products'
+import { removeItemFromCart } from '@lib/swell/cart'
 import { useCart } from '@lib/context/useCart'
 
 export default function CartProductRow({ cartItem }: { cartItem: any }) {
@@ -42,7 +42,7 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 					{/* Product name */}
 					{name && <h3 className="text-xl text-[#1C1C18]">{name}</h3>}
 
-					{/* Product description */}
+					{/* Purchase description */}
 					{purchase_option ? (
 						<p className="text-sm text-[#4F4F4F]">
 							Subscribe &amp; save, {variant.name} every{' '}

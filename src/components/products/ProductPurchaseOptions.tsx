@@ -15,14 +15,13 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const [price, setPrice] = useState(product?.price)
 
 	/**
-	 * Based on the purchase options offered,
-	 * we're just going to make it simpler for coding/display purposes.
+	 * We're just going to make it simpler for coding/display purposes.
 	 * We are using these size options to display the box sizes.
 	 */
 	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
 
 	/**
-	 * User-selected size. (eg. "Standard box (12oz)" or "Bulk bag (5lbs)").
+	 * User-selected size. (eg. "Standard bag (12oz)" or "Bulk bag (5lbs)").
 	 * Initialized to the first size option in the list.
 	 */
 	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
@@ -46,19 +45,19 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 		: []
 
 	/**
-	 * User-selected "subscription plan" (eg. "Every 4 weeks" or "Every 2 months").
-	 * Initialized to the first delivery option in the list.
-	 */
-	const [subscriptionPlan, setSubscriptionPlan] = useState(
-		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
-	)
-
-	/**
 	 * If we have products that do not offer a subscription
 	 * always initialize the state variable to the standard purchase option.
 	 */
 	const [selectedPurchaseOption, setSelectedPurchaseOption] = useState(
 		purchaseOptions[0] || { id: 'standard' }
+	)
+
+	/**
+	 * User-selected "subscription plan" (eg. "Every 4 weeks" or "Every 2 months").
+	 * Initialized to the first delivery option in the list.
+	 */
+	const [subscriptionPlan, setSubscriptionPlan] = useState(
+		product?.purchase_options?.subscription ? product.purchase_options.subscription.plans[0] : null
 	)
 
 	/**

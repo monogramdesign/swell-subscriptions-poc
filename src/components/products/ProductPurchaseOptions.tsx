@@ -17,6 +17,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	/**
 	 * We're just going to make it simpler for coding/display purposes.
 	 * We are using these size options to display the box sizes.
+	 * (eg. "Standard bag (12oz)" or "Bulk bag (5lbs)").
 	 */
 	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
 
@@ -148,26 +149,28 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 			</div>
 
 			{/* Purchase option */}
-			<fieldset>
-				<legend className="sr-only">Purchase method</legend>
-				<div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-					{purchaseOptions.map((option) => (
-						<div key={option.id} className="flex items-center">
-							<input
-								id={option.id}
-								name="notification-method"
-								type="radio"
-								checked={option.id === selectedPurchaseOption.id}
-								onChange={() => setSelectedPurchaseOption(option)}
-								className="h-4 w-4 border-gray-300 text-[#A2B22D] focus:ring-[#A2B22D]"
-							/>
-							<label htmlFor={option.id} className="block ml-3 text-sm font-medium text-gray-700">
-								{option.title}
-							</label>
-						</div>
-					))}
-				</div>
-			</fieldset>
+			{purchaseOptions.length > 1 && (
+				<fieldset>
+					<legend className="sr-only">Purchase method</legend>
+					<div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+						{purchaseOptions.map((option) => (
+							<div key={option.id} className="flex items-center">
+								<input
+									id={option.id}
+									name="notification-method"
+									type="radio"
+									checked={option.id === selectedPurchaseOption.id}
+									onChange={() => setSelectedPurchaseOption(option)}
+									className="h-4 w-4 border-gray-300 text-[#A2B22D] focus:ring-[#A2B22D]"
+								/>
+								<label htmlFor={option.id} className="block ml-3 text-sm font-medium text-gray-700">
+									{option.title}
+								</label>
+							</div>
+						))}
+					</div>
+				</fieldset>
+			)}
 
 			{/* Subscription frequency */}
 			{selectedPurchaseOption?.id === 'subscription' && (

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { addToCart } from '@lib/swell/cart'
 import type { Product } from '@lib/types'
-import { formatCurrency, getDeliveryFrequency } from '@lib/utils'
+import { formatCurrency, getDeliveryFrequencyDisplay } from '@lib/utils'
 import { useCart } from '@lib/context/useCart'
 
 const ProductPurchaseOptions = ({ product }: { product: Product }) => {
@@ -185,7 +185,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 					>
 						{product?.purchase_options.subscription.plans.map((plan: any) => (
 							<option key={plan.id} value={plan.id}>
-								Every {getDeliveryFrequency(plan)}
+								Every {getDeliveryFrequencyDisplay(plan)}
 							</option>
 						))}
 					</select>

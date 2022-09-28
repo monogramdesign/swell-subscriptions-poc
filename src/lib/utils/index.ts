@@ -26,9 +26,9 @@ export const capitalize = (text: string) => {
 	return first + lower.slice(1)
 }
 
-export const getDeliveryFrequency = (plan: any) => {
+export const getDeliveryFrequencyDisplay = (plan: any) => {
 	if (plan.billing_schedule.interval_count === 1) {
-		return plan.billing_schedule.interval
+		return plan.billing_schedule.interval === 'weekly' ? 'week' : 'month'
 	} else {
 		return `${plan.billing_schedule.interval_count} ${
 			plan.billing_schedule.interval === 'weekly' ? 'weeks' : 'months'

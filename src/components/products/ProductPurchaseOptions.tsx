@@ -22,6 +22,12 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 	const sizeOptions = product?.options.find((option) => option.name === 'Size')?.values
 
 	/**
+	 * User-selected size. (eg. "Standard box (12oz)" or "Bulk bag (5lbs)").
+	 * Initialized to the first size option in the list.
+	 */
+	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
+
+	/**
 	 * Simplifying the purchase options for this demo.
 	 *
 	 * Used in the purchase options radio buttons
@@ -38,12 +44,6 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 						: 'Trial'
 		  }))
 		: []
-
-	/**
-	 * User-selected size. (eg. "Standard box (12oz)" or "Bulk bag (5lbs)").
-	 * Initialized to the first size option in the list.
-	 */
-	const [selectedSize, setSelectedSize] = useState(sizeOptions?.[0])
 
 	/**
 	 * User-selected "subscription plan" (eg. "Every 4 weeks" or "Every 2 months").

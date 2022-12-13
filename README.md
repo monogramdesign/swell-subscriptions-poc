@@ -35,4 +35,5 @@ Accompanying wireframes can be found in [Monogram's Figma](https://www.figma.com
 
 [https://github.com/monogramdesign/swell-subscriptions-poc/](https://github.com/monogramdesign/swell-subscriptions-poc/)
 
+## Images
 Non-product images hosted on [Raster](https://raster.app/).

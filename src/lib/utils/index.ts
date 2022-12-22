@@ -27,11 +27,40 @@ export const capitalize = (text: string) => {
 }
 
 export const getDeliveryFrequencyDisplay = (plan: any) => {
-	if (plan.billing_schedule.interval_count === 1) {
-		return plan.billing_schedule.interval === 'weekly' ? 'week' : 'month'
-	} else {
-		return `${plan.billing_schedule.interval_count} ${
-			plan.billing_schedule.interval === 'weekly' ? 'weeks' : 'months'
-		}`
+	let interval = ''
+
+	switch (plan.billing_schedule.interval) {
+		case 'daily':
+			interval =
+				plan.billing_schedule.interval_count === 1
+					? 'day'
+					: `${plan.billing_schedule.interval_count} days`
+			break
+
+		case 'weekly':
+			interval =
+				plan.billing_schedule.interval_count === 1
+					? 'week'
+					: `${plan.billing_schedule.interval_count} weeks`
+			break
+
+		case 'monthly':
+			interval =
+				plan.billing_schedule.interval_count === 1
+					? 'month'
+					: `${plan.billing_schedule.interval_count} months`
+			break
+
+		case 'yearly':
+			interval =
+				plan.billing_schedule.interval_count === 1
+					? 'year'
+					: `${plan.billing_schedule.interval_count} years`
+			break
+
+		default:
+			interval = '?'
 	}
+
+	return `Every ${interval}`
 }

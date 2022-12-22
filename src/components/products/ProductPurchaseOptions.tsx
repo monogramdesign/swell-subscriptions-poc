@@ -187,7 +187,7 @@ const ProductPurchaseOptions = ({ product }: { product: Product }) => {
 					>
 						{product?.purchase_options.subscription.plans.map((plan: any) => (
 							<option key={plan.id} value={plan.id}>
-								Every {getDeliveryFrequencyDisplay(plan)}
+								{getDeliveryFrequencyDisplay(plan)}
 							</option>
 						))}
 					</select>

@@ -45,8 +45,7 @@ export default function CartProductRow({ cartItem }: { cartItem: any }) {
 					{/* Purchase description */}
 					{purchase_option ? (
 						<p className="text-sm text-[#4F4F4F]">
-							Subscribe &amp; save, {variant.name} every{' '}
-							{getDeliveryFrequencyDisplay(purchase_option)}
+							Subscribe &amp; save, {variant.name} {getDeliveryFrequencyDisplay(purchase_option)}
 						</p>
 					) : (
 						<p className="text-sm text-[#4F4F4F]">{variant.name}</p>
